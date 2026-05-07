@@ -1,9 +1,9 @@
 default rel
 
 section .data
-    promptN    db "N: ", 0
-    promptNums db "Nums:", 10, 0
-    resMsg     db "Result: %d", 10, 0
+    promptN    db "Введите N: ", 0
+    promptNums db "Введите числа: ", 10, 0
+    resMsg     db "Результат: %d", 10, 0
     fmtIn      db "%d", 0
 
 section .bss
