@@ -20,7 +20,7 @@ func main1() {
 	for i := 0; i < n; i++ {
 		var start, end int
 		fmt.Scan(&start, &end)
-		meetings = append(meetings, Meeting{ID: i + 1, Start: start, End: end})
+		meetings = append(meetings, Meeting{ID: i, Start: start, End: end})
 	}
 	sort.Slice(meetings, func(i, j int) bool {
 		return meetings[i].End < meetings[j].End
