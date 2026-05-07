@@ -5,7 +5,7 @@ import (
 	"sort"
 )
 
-func main1() {
+func main() {
 	var n int
 	fmt.Println("Введите количество встреч:")
 	fmt.Scan(&n)

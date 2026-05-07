@@ -15,8 +15,14 @@ public class zadanie2 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Введите количество встреч: ");
-        if (!sc.hasNextInt()) return; 
+        
+        if (!sc.hasNextInt()) {
+            sc.close();
+            return; 
+        }
+        
         int n = sc.nextInt();
+        
         System.out.println("Введите время начала и окончания каждой встречи (формат: start end): ");
         List<Meeting> meetings = new ArrayList<>();
         for (int i = 0; i < n; i++) {
@@ -42,7 +48,8 @@ public class zadanie2 {
         for (int id : result) {
             System.out.print(id + " ");
         }
+        System.out.println(); 
         
         sc.close();
-    }
+    } 
 }

@@ -2,14 +2,20 @@
     "version": "0.2.0",
     "configurations": [
         {
-    "name": "Debug Swift File",
-    "type": "lldb",
+    "type": "java",
+    "name": "Current File",
     "request": "launch",
-    "program": "${fileDirname}/${fileBasenameNoExtension}",
-    "args": [],
-    "cwd": "${fileDirname}",
-    "preLaunchTask": "swift: Build Active File"
+    "mainClass": "${file}"
 },
+        {
+            "name": "Debug Swift File",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "args": [],
+            "cwd": "${fileDirname}",
+            "preLaunchTask": "swift: Build Active File"
+        },
         {
             "name": "ASM Debug (NASM)",
             "type": "cppdbg",
@@ -36,18 +42,18 @@
             "program": "${file}"
         },
         {
-    "name": "Elixir: Run Script",
-    "type": "mix_task",
-    "request": "launch",
-    "task": "run",
-    "projectDir": "${workspaceRoot}",
-    "exitAfterTaskReturns": false
-},
-{
-    "name": "Elixir: Debug Current File",
-    "type": "elixir",
-    "request": "launch",
-    "program": "${file}"
-}
+            "name": "Elixir: Run Script",
+            "type": "mix_task",
+            "request": "launch",
+            "task": "run",
+            "projectDir": "${workspaceRoot}",
+            "exitAfterTaskReturns": false
+        },
+        {
+            "name": "Elixir: Debug Current File",
+            "type": "elixir",
+            "request": "launch",
+            "program": "${file}"
+        }
     ]
 }
