@@ -12,7 +12,7 @@ int main(){
     string result = "";
     
     for (int i = 0; i < s.length(); i++){
-        for (int j = t.length(); i + j <= s.length(); j ++){
+        for (int j = t.length(); i + j <= s.length(); j++){
             string part = s.substr(i,j);
             string part_1 = part;
             int ch = 0;
@@ -27,6 +27,12 @@ int main(){
                     if (part[m] == t[k]) count_part++; 
                 }
                 if (count_part < count_t) ch++;
+            }
+        
+            if (ch == 0) {
+                if (result == "" || part.length() < result.length()) {
+                    result = part;
+                }
             }
         }
     }   
