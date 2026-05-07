@@ -12,7 +12,6 @@ rl.question("Введите количество встреч: ", (n) => {
 
     function askMeeting() {
         if (i === n) {
-            // логика решения
             meetings.sort((a, b) => a.end - b.end);
 
             let result = [];
@@ -31,7 +30,7 @@ rl.question("Введите количество встреч: ", (n) => {
             return;
         }
 
-        rl.question(`Встреча ${i + 1} (start end): `, (line) => {
+        rl.question(`Введите время начала и окончания каждой встречи (формат: start end): `, (line) => {
             let [start, end] = line.split(' ').map(Number);
             meetings.push({ start, end, id: i + 1 });
             i++;
