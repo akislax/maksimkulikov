@@ -1,8 +1,8 @@
 fun main() {
     println("Введите строку S: ")
-    var s = readln()
+    var s = readln().trim() 
     println("Введите строку T: ")
-    var t = readln()
+    var t = readln().trim() 
     var result = ""
     for (i in 0 until s.length){
         for( j in 1..s.length - i){
