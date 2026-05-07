@@ -1,0 +1,38 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Assemble and Link",
+            "type": "shell",
+            "command": "nasm -f elf64 -g -F dwarf ${file} -o ${fileDirname}/${fileBasenameNoExtension}.o && gcc ${fileDirname}/${fileBasenameNoExtension}.o -o ${fileDirname}/${fileBasenameNoExtension} -no-pie -g",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "type": "cppbuild",
+            "label": "C/C++: g++ сборка активного файла",
+            "command": "/usr/bin/g++",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": ["$gcc"],
+            "group": "build"
+        },
+        {
+    "label": "swift: Build Active File",
+    "type": "shell",
+    "command": "swiftc ${file} -o ${fileDirname}/${fileBasenameNoExtension} -g",
+    "group": "build",
+    "problemMatcher": "$swiftc"
+}
+    ]
+}

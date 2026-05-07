@@ -1,0 +1,53 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+    "name": "Debug Swift File",
+    "type": "lldb",
+    "request": "launch",
+    "program": "${fileDirname}/${fileBasenameNoExtension}",
+    "args": [],
+    "cwd": "${fileDirname}",
+    "preLaunchTask": "swift: Build Active File"
+},
+        {
+            "name": "ASM Debug (NASM)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "stopAtEntry": true,
+            "cwd": "${fileDirname}",
+            "MIMode": "gdb",
+            "preLaunchTask": "Assemble and Link"
+        },
+        {
+            "name": "C++",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "cwd": "${fileDirname}",
+            "MIMode": "gdb",
+            "preLaunchTask": "C/C++: g++ сборка активного файла"
+        },
+        {
+            "name": "Python",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}"
+        },
+        {
+    "name": "Elixir: Run Script",
+    "type": "mix_task",
+    "request": "launch",
+    "task": "run",
+    "projectDir": "${workspaceRoot}",
+    "exitAfterTaskReturns": false
+},
+{
+    "name": "Elixir: Debug Current File",
+    "type": "elixir",
+    "request": "launch",
+    "program": "${file}"
+}
+    ]
+}
