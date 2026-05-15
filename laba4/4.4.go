@@ -5,60 +5,61 @@ import (
 )
 
 func main() {
-	fmt.Println("Введите количество кандидатов: ")
+	fmt.Println("Введите количество кандидатов:")
 	var n int
 	fmt.Scan(&n)
 
-	fmt.Print("Введите количество избирателей: ")
-	var k int
-	fmt.Scan(&k)
+	fmt.Print("Введите количество групп избирателей: ")
+	var g int
+	fmt.Scan(&g)
 
-	votes := make([][]int, 0)
+	counts := make([]int, g)
+	votes := make([][]int, g)
+	k := 0
 
-	for i := 0; i < k; i++ {
-		fmt.Printf("Избиратель №%d: ", i+1)
-		single_votes := make([]int, 0)
+	for i := 0; i < g; i++ {
+		fmt.Printf("Группа №%d - количество человек: ", i+1)
+		fmt.Scan(&counts[i])
+		k += counts[i]
+
+		fmt.Printf("Группа №%d - порядок кандидатов: ", i+1)
+		votes[i] = make([]int, n)
 		for j := 0; j < n; j++ {
-			var id int
-			fmt.Scan(&id)
-			single_votes = append(single_votes, id)
+			fmt.Scan(&votes[i][j])
 		}
-		votes = append(votes, single_votes)
 	}
 
+	// Подсчёт очков по Борду
 	scores := make(map[int]int)
-	for i := 0; i < k; i++ {
+	for i := 0; i < g; i++ {
 		for j := 0; j < n; j++ {
 			candidate := votes[i][j]
-			points := n - 1 - j
-			scores[candidate] += points
+			points := (n - 1 - j)
+			scores[candidate] += points * counts[i]
 		}
 	}
 
-	winner_borda := -1
-	max_points := -1
-	for candidate, points := range scores {
-		if points > max_points {
-			max_points = points
-			winner_borda = candidate
+	winnerBorda := -1
+	maxPoints := -1
+	for candidate, pts := range scores {
+		if pts > maxPoints {
+			maxPoints = pts
+			winnerBorda = candidate
 		}
 	}
-	fmt.Printf("По Борду: %d\n", winner_borda)
+	fmt.Printf("По Борду: %d\n", winnerBorda)
 
-	condorcet_winner := -1
-
+	// Поиск победителя по Кондорсе
+	condorcetWinner := -1
+outer:
 	for candA := range scores {
-		wins_everyone := true
-
 		for candB := range scores {
 			if candA == candB {
 				continue
 			}
-
-			wins_in_pair := 0
-			for i := 0; i < k; i++ {
-				posA := -1
-				posB := -1
+			winsInPair := 0
+			for i := 0; i < g; i++ {
+				posA, posB := -1, -1
 				for j := 0; j < n; j++ {
 					if votes[i][j] == candA {
 						posA = j
@@ -68,24 +69,19 @@ func main() {
 					}
 				}
 				if posA < posB {
-					wins_in_pair++
+					winsInPair += counts[i]
 				}
 			}
-
-			if wins_in_pair <= (k - wins_in_pair) {
-				wins_everyone = false
-				break
+			if winsInPair <= (k - winsInPair) {
+				continue outer
 			}
 		}
-
-		if wins_everyone {
-			condorcet_winner = candA
-			break
-		}
+		condorcetWinner = candA
+		break
 	}
 
-	if condorcet_winner != -1 {
-		fmt.Printf("По Кондорсе: %d\n", condorcet_winner)
+	if condorcetWinner != -1 {
+		fmt.Printf("По Кондорсе: %d\n", condorcetWinner)
 	} else {
 		fmt.Println("По Кондорсе: не определён")
 	}
