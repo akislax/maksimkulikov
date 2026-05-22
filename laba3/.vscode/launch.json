@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Current File",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${file}"
+        },
+        {
+            "name": "C++",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "cwd": "${fileDirname}",
+            "MIMode": "gdb",
+            "preLaunchTask": "C/C++: g++ сборка активного файла"
+        }
+    ]
+}
